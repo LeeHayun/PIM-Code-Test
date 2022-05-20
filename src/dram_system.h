@@ -34,6 +34,9 @@ class BaseDRAMSystem {
     virtual void ClockTick() = 0;
     int GetChannel(uint64_t hex_addr) const;
 
+    bool IsPendingTransaction();
+    void SetWriteBufferThreshold(int threshold);
+
     std::function<void(uint64_t req_id)> read_callback_, write_callback_;
     static int total_channels_;
 

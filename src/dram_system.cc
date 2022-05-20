@@ -93,6 +93,20 @@ void BaseDRAMSystem::RegisterCallbacks(
     write_callback_ = write_callback;
 }
 
+bool BaseDRAMSystem::IsPendingTransaction() {
+    for (size_t i = 0; i < ctrls_.size(); i++) {
+        if (ctrls_[i]->IsPendingTransaction())
+            return true;
+    }
+    return false;
+}
+
+void BaseDRAMSystem::SetWriteBufferThreshold(int threshold) {
+    for (size_t i = 0; i < ctrls_.size(); i++) {
+        ctrls_[i]->write_buffer_threshold_ = (threshold < 0) ? 8 : threshold;
+    }
+}
+
 JedecDRAMSystem::JedecDRAMSystem(Config &config, const std::string &output_dir,
                                  std::function<void(uint64_t)> read_callback,
                                  std::function<void(uint64_t)> write_callback)

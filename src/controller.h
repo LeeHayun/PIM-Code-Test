@@ -37,6 +37,9 @@ class Controller {
     void ResetStats() { simple_stats_.Reset(); }
     std::pair<uint64_t, int> ReturnDoneTrans(uint64_t clock);
 
+    bool IsPendingTransaction();
+    int write_buffer_threshold_;
+
     int channel_id_;
 
    private:

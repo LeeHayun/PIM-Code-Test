@@ -55,6 +55,14 @@ MemorySystem* GetMemorySystem(const std::string &config_file, const std::string 
                  std::function<void(uint64_t)> write_callback) {
     return new MemorySystem(config_file, output_dir, read_callback, write_callback);
 }
+
+bool MemorySystem::IsPendingTransaction() {
+    return dram_system_->IsPendingTransaction();
+}
+
+void MemorySystem::SetWriteBufferThreshold(int threshold) {
+    dram_system_->SetWriteBufferThreshold(threshold);
+}
 }  // namespace dramsim3
 
 // This function can be used by autoconf AC_CHECK_LIB since

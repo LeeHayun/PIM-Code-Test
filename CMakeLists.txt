@@ -96,6 +96,17 @@ set_target_properties(dramsim3main PROPERTIES
     CXX_EXTENSIONS NO
 )
 
+# trace CPU, .etc
+add_executable(dramsim3main_pim src/main_pim.cc src/transaction_generator.cc)
+target_link_libraries(dramsim3main_pim PRIVATE dramsim3 args)
+target_compile_options(dramsim3main_pim PRIVATE)
+set_target_properties(dramsim3main_pim PROPERTIES
+    CXX_STANDARD 11
+    CXX_STANDARD_REQUIRED YES
+    CXX_EXTENSIONS NO
+)
+
+
 # Unit testing
 add_library(Catch INTERFACE)
 target_include_directories(Catch INTERFACE ext/headers)
